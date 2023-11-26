@@ -22,6 +22,24 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'productType',
+      title: 'Product Type',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          {
+            title: 'Card',
+            value: 'card'
+          },
+          {
+            title: 'Stained Glass',
+            value: 'glass'
+          }
+        ]
+      }
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
@@ -41,6 +59,12 @@ export default defineType({
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'string'}]
     }),
   ],
   preview: {

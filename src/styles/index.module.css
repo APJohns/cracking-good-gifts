@@ -1,0 +1,106 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 4rem 0.5rem;
+  text-align: center;
+  background: var(--accent1);
+}
+
+.title {
+  font-size: 1.75rem;
+}
+
+.tagline {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.btn {
+  display: block;
+  border: 2px solid black;
+  padding: 0.33rem 1rem;
+  font-size: 1.25rem;
+  color: black;
+  background: var(--accent2);
+}
+
+.btn:hover {
+  background: var(--accent2-dark);
+  cursor: pointer;
+}
+
+.cta {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 4rem auto;
+  padding: 0.5rem;
+  width: var(--app-width);
+}
+
+.contact {
+  margin: auto;
+  padding: 0 0.5rem 4rem 0.5rem;
+  width: var(--app-width);
+  text-align: center;
+}
+
+.contact p {
+  margin-top: 1rem;
+}
+
+.contactForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.contactForm input {
+  border: 2px solid black;
+  padding: 0.33rem 1rem;
+  width: 100%;
+  color: black;
+  background: white;
+}
+
+.contactForm textarea {
+  display: block;
+  border: 2px solid black;
+  padding: 0.33rem 1rem;
+  width: 100%;
+  color: black;
+  background: white;
+  resize: vertical;
+}
+
+.message {
+  grid-column: span 2;
+}
+
+.submit {
+  background:var(--accent2);
+}
+
+.contactForm .btn {
+  grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    gap: 1.5rem;
+  }
+}

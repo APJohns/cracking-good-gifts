@@ -1,7 +1,7 @@
 import '~/styles/global.css'
 
 import type { AppProps } from 'next/app'
-import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
+import { IBM_Plex_Mono, Inter, PT_Serif, Viaoda_Libre, Montserrat } from 'next/font/google'
 import { lazy } from 'react'
 
 export interface SharedPageProps {
@@ -17,10 +17,16 @@ const mono = IBM_Plex_Mono({
   weight: ['500', '700'],
 })
 
-const sans = Inter({
+const sans = Montserrat({
   variable: '--font-family-sans',
   subsets: ['latin'],
-  weight: ['500', '700', '800'],
+  weight: ['400', '600', '700'],
+})
+
+const display = Viaoda_Libre({
+  variable: '--font-family-display',
+  subsets: ['latin'],
+  weight: ['400'],
 })
 
 const serif = PT_Serif({
@@ -42,6 +48,7 @@ export default function App({
           :root {
             --font-family-sans: ${sans.style.fontFamily};
             --font-family-serif: ${serif.style.fontFamily};
+            --font-family-display: ${display.style.fontFamily};
             --font-family-mono: ${mono.style.fontFamily};
           }
         `}
