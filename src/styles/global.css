@@ -12,6 +12,9 @@
   --accent1: #d5eaed;
   --accent2: hsl(17, 87%, 75%);
   --accent2-dark: hsl(17, 87%, 70%);
+
+  --fs-regular: 1.25rem;
+  --fs-subtle: 1rem;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -34,7 +37,7 @@ body {
 }
 
 body {
-  font-size: 1.25rem;
+  font-size: var(--fs-regular);
   font-family: var(--font-family-sans);
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
@@ -50,13 +53,54 @@ textarea {
   font-size: 1.25rem;
 }
 
+.footer {
+  border-top: 1px solid #999;
+}
+
+.footer-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem 2rem;
+  margin: auto;
+  padding: 2rem 0;
+  width: var(--app-width);
+}
+
+.footer-brand {
+  font-family: var(--font-family-display);
+  font-size: 1.5rem;
+}
+
+.footer-contact {
+  font-size: var(--fs-subtle);
+}
+
+.standard-padding-x {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
 
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+  .footer-body {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand {
+    justify-self: start;
+  }
+
+  .footer-contact {
+    justify-self: end;
+  }
+}
 @media (min-width: 768px) {
   :root {
     --app-width: 85vw;

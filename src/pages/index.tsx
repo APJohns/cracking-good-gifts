@@ -43,9 +43,8 @@ export default function IndexPage(
           <h1>Cracking Good Gifts</h1>
         </Link>
         <p className={styles.tagline}>Crafting a better world<br />One gift at a time</p>
-        <Link href="#getInTouch" className={`${styles.cta} ${styles.btn}`}>Get in Touch</Link>
       </header>
-      <section>
+      <section className="standard-padding-x">
         <ul className={styles.gallery}>
           {products.length && products.map((post) => (
             <li key={post._id}>
