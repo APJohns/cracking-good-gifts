@@ -6,19 +6,11 @@
   box-shadow: 0 0 6px rgba(0,0,0,0.5);
 }
 
-.cover {
-  position: relative;
-}
-
 .image {
   display: block;
   width: 100%;
   height: auto;
 }
-
-/* .body {
-  padding: 0.5rem;
-} */
 
 .header {
   display: flex;
@@ -28,11 +20,11 @@
 }
 
 .title {
-  font-size: 1.1rem;
+  font-size: var(--fs-subtle);
   font-weight: 500;
 }
 
 .price {
-  font-size: 1.1rem;
+  font-size: var(--fs-subtle);
   background: rgb(var(--background-rgb));
 }

@@ -42,7 +42,7 @@
 
 .gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0.5rem;
   list-style: none;
   margin: 4rem auto;
@@ -99,8 +99,22 @@
   grid-column: span 2;
 }
 
+@media (min-width: 556px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
 @media (min-width: 768px) {
   .gallery {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1.5rem;
   }
 }

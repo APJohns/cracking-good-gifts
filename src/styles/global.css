@@ -1,6 +1,6 @@
 :root {
   --min-width: 1100px;
-  --app-width: 100vw;
+  --app-width: 100%;
 
   --font-family-sans: Inter;
   --font-family-display: Viaoda Libre;

@@ -20,9 +20,9 @@ export default function PostCard({ post }: { post: Product }) {
       <div className={styles.body}>
         <div className={styles.header}>
           <h3 className={styles.title}>
-            <a href={`/post/${post.slug.current}`}>
-              {post.title}
-            </a>
+            {/* <a href={`/post/${post.slug.current}`}> */}
+            {post.title}
+            {/* </a> */}
           </h3>
           <p className={styles.price}>${post.price}</p>
         </div>
