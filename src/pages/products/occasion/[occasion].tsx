@@ -1,16 +1,16 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { Inter,Viaoda_Libre } from 'next/font/google'
+import { Inter, Viaoda_Libre } from 'next/font/google'
 import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
-import Card from '~/components/Card'
 import Container from '~/components/Container'
+import ProductList from '~/components/ProductList'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import {
-  getProductsByCategory,
+  getProductsByOccasion,
   type Product,
-  productsByCategorygQuery,
+  productsByOccasionQuery,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import styles from '~/styles/index.module.css'
@@ -24,10 +24,10 @@ export const getServerSideProps: GetServerSideProps<
   }
 > = async ({ draftMode = false, params }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const categoryParam = Array.isArray(params.category)
-    ? params.category[0]
-    : params.category
-  const products = await getProductsByCategory(client, categoryParam)
+  const occasionParam = Array.isArray(params.occasion)
+    ? params.occasion[0]
+    : params.occasion
+  const products = await getProductsByOccasion(client, occasionParam)
 
   return {
     props: {
@@ -38,12 +38,12 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
-export default function CategoryPage(
+export default function OccasionPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
   const [products] = useLiveQuery<Product[]>(
     props.products,
-    productsByCategorygQuery,
+    productsByOccasionQuery,
   )
 
   return (
@@ -54,20 +54,7 @@ export default function CategoryPage(
         </Link>
       </header>
       <section className="standard-padding-x">
-        {products.length ? (
-          <ul className={styles.gallery}>
-            {products.map((product) => (
-              <li key={product._id}>
-                <Card product={product} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>
-            We don&apos;t have any products of the type available right now. Please
-            check back later, or reach out to us.
-          </p>
-        )}
+        <ProductList products={products} />
       </section>
     </Container>
   )

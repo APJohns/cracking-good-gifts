@@ -19,14 +19,25 @@ export async function getProduct(
   })
 }
 
-export const productsByCategorygQuery = groq`*[_type == "product" && category->slug.current == $category]`
+export const productsByCategoryQuery = groq`*[_type == "product" && category->slug.current == $category]`
 
 export async function getProductsByCategory(
   client: SanityClient,
   category: string,
 ): Promise<Product[]> {
-  return await client.fetch(productsByCategorygQuery, {
+  return await client.fetch(productsByCategoryQuery, {
     category,
+  })
+}
+
+export const productsByOccasionQuery = groq`*[_type == "product" && occasion->slug.current == $occasion]`
+
+export async function getProductsByOccasion(
+  client: SanityClient,
+  occasion: string,
+): Promise<Product[]> {
+  return await client.fetch(productsByOccasionQuery, {
+    occasion,
   })
 }
 
@@ -57,4 +68,19 @@ export const categoriesQuery = groq`*[_type == "category" && defined(slug.curren
 
 export async function getCategories(client: SanityClient): Promise<Category[]> {
   return await client.fetch(categoriesQuery)
+}
+
+// Occasion
+
+export interface Occasion {
+  _type: 'category'
+  _id: string
+  title: string
+  slug: Slug
+}
+
+export const occasionsQuery = groq`*[_type == "occasion" && defined(slug.current)]`
+
+export async function getOccasions(client: SanityClient): Promise<Occasion[]> {
+  return await client.fetch(occasionsQuery)
 }

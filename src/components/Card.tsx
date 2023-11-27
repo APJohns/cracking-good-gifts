@@ -4,7 +4,7 @@ import { urlForImage } from '~/lib/sanity.image'
 import { type Product } from '~/lib/sanity.queries'
 import styles from '~/styles/card.module.css'
 
-export default function PostCard({ product }: { product: Product }) {
+export default function Card({ product }: { product: Product }) {
   return (
     <div className={styles.card}>
       <div className={styles.cover}>

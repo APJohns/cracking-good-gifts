@@ -1,0 +1,27 @@
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 4rem auto;
+  padding: 0.5rem;
+  width: var(--app-width);
+}
+
+.nonFound {
+  width: var(--app-width);
+  margin: 4rem auto;
+}
+
+@media (min-width: 556px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
