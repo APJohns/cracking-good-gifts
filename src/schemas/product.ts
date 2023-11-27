@@ -24,20 +24,15 @@ export default defineType({
     defineField({
       name: 'productType',
       title: 'Product Type',
-      type: 'string',
+      type: 'reference',
+      to: [{type: 'productType'}],
       validation: (Rule) => Rule.required(),
-      options: {
-        list: [
-          {
-            title: 'Card',
-            value: 'card'
-          },
-          {
-            title: 'Stained Glass',
-            value: 'glass'
-          }
-        ]
-      }
+    }),
+    defineField({
+      name: 'occasion',
+      title: 'Occasion',
+      type: 'reference',
+      to: [{type: 'occasion'}],
     }),
     defineField({
       name: 'description',
@@ -64,7 +59,11 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{type: 'string'}]
+      of: [{type: 'string'}],
+      options: {
+        sortable: false,
+        layout: 'tags'
+      }
     }),
   ],
   preview: {

@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
-export default function IndexPage(
+export default function ProductsPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
   const [products] = useLiveQuery<Product[]>(props.products, productsQuery)
@@ -44,19 +44,15 @@ export default function IndexPage(
         </Link>
         <p className={styles.tagline}>Crafting a better world<br />One gift at a time</p>
       </header>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/products">Cards</Link>
-          </li>
-          <li>
-            <Link href="/products">Stained Glass</Link>
-          </li>
-          <li>
-            <Link href="/products">All Products</Link>
-          </li>
+      <section className="standard-padding-x">
+        <ul className={styles.gallery}>
+          {products.length && products.map((post) => (
+            <li key={post._id}>
+              <Card post={post} />
+            </li>
+          ))}
         </ul>
-      </nav>
+      </section>
     </Container>
   )
 }
