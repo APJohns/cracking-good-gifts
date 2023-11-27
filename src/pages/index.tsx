@@ -1,4 +1,4 @@
-import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
 import Link from 'next/link'
 
@@ -15,7 +15,7 @@ import styles from '~/styles/index.module.css';
 const viaoda = Viaoda_Libre({ weight: "400", subsets: ['latin'] })
 const inter = Inter({ subsets: ['latin'] })
 
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   SharedPageProps & {
     products: Product[]
   }
@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps<
 }
 
 export default function IndexPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>,
+  props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
   const [products] = useLiveQuery<Product[]>(props.products, productsQuery)
   return (
