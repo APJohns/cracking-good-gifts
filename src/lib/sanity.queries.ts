@@ -1,4 +1,3 @@
-import type { PortableTextBlock } from '@portabletext/types'
 import type { ImageAsset, Slug } from '@sanity/types'
 import groq from 'groq'
 import { type SanityClient } from 'next-sanity'
@@ -23,17 +22,6 @@ export async function getProduct(
 export const productSlugsQuery = groq`
 *[_type == "product" && defined(slug.current)][].slug.current
 `
-
-/* export interface Product {
-  _type: 'product'
-  _id: string
-  _createdAt: string
-  title?: string
-  slug: Slug
-  excerpt?: string
-  mainImage?: ImageAsset
-  body: PortableTextBlock[]
-} */
 
 export interface Product {
   _type: 'product'
