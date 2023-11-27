@@ -1,73 +1,73 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import { Viaoda_Libre } from 'next/font/google'
+import { Inter,Viaoda_Libre } from 'next/font/google'
 import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
+import Card from '~/components/Card'
 import Container from '~/components/Container'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import {
-  categoriesQuery,
-  type Category,
-  getCategories,
+  getProductsByCategory,
+  type Product,
+  productsByCategorygQuery,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import styles from '~/styles/index.module.css'
 
 const viaoda = Viaoda_Libre({ weight: '400', subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const getServerSideProps: GetServerSideProps<
   SharedPageProps & {
-    categories: Category[]
+    products: Product[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, params }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const categories = await getCategories(client)
+  const categoryParam = Array.isArray(params.category)
+    ? params.category[0]
+    : params.category
+  const products = await getProductsByCategory(client, categoryParam)
 
   return {
     props: {
       draftMode,
       token: draftMode ? readToken : '',
-      categories,
+      products,
     },
   }
 }
 
-export default function IndexPage(
+export default function CategoryPage(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
-  const [categories] = useLiveQuery<Category[]>(
-    props.categories,
-    categoriesQuery,
+  const [products] = useLiveQuery<Product[]>(
+    props.products,
+    productsByCategorygQuery,
   )
+
   return (
     <Container>
-      <header className={`${styles.hero}`}>
+      <header className={`${styles.hero} ${inter.className}`}>
         <Link href="/" className={`${styles.title} ${viaoda.className}`}>
           <h1>Cracking Good Gifts</h1>
         </Link>
-        <p className={styles.tagline}>
-          Crafting a better world
-          <br />
-          One gift at a time
-        </p>
       </header>
-      <section className={`${styles.categories} standard-padding-x`}>
-        <h2>Shop by Category</h2>
-        <nav>
-          <ul className={styles.categoryList}>
-            {categories.map((category) => (
-              <li key={category._id}>
-                <Link
-                  href={`/products/${category.slug.current}`}
-                  className={styles.category}
-                >
-                  {category.title}
-                </Link>
+      <section className="standard-padding-x">
+        {products.length ? (
+          <ul className={styles.gallery}>
+            {products.map((product) => (
+              <li key={product._id}>
+                <Card product={product} />
               </li>
             ))}
           </ul>
-        </nav>
+        ) : (
+          <p>
+            We don&apos;t have any products of the type available right now. Please
+            check back later, or reach out to us.
+          </p>
+        )}
       </section>
     </Container>
   )

@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'product',
@@ -22,17 +22,17 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'productType',
-      title: 'Product Type',
+      name: 'category',
+      title: 'Category',
       type: 'reference',
-      to: [{type: 'productType'}],
+      to: [{ type: 'category' }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'occasion',
       title: 'Occasion',
       type: 'reference',
-      to: [{type: 'occasion'}],
+      to: [{ type: 'occasion' }],
     }),
     defineField({
       name: 'description',
@@ -59,11 +59,11 @@ export default defineType({
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       options: {
         sortable: false,
-        layout: 'tags'
-      }
+        layout: 'tags',
+      },
     }),
   ],
   preview: {
@@ -73,8 +73,8 @@ export default defineType({
       media: 'image',
     },
     prepare(selection) {
-      const { author } = selection;
-      return { ...selection, subtitle: author && `by ${author}` };
+      const { author } = selection
+      return { ...selection, subtitle: author && `by ${author}` }
     },
   },
-});
+})

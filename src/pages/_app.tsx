@@ -1,7 +1,13 @@
 import '~/styles/global.css'
 
 import type { AppProps } from 'next/app'
-import { IBM_Plex_Mono, Inter, PT_Serif, Viaoda_Libre, Montserrat } from 'next/font/google'
+import {
+  IBM_Plex_Mono,
+  Inter,
+  Montserrat,
+  PT_Serif,
+  Viaoda_Libre,
+} from 'next/font/google'
 import { lazy } from 'react'
 
 export interface SharedPageProps {

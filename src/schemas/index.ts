@@ -1,11 +1,11 @@
-import { SchemaTypeDefinition } from 'sanity';
+import { SchemaTypeDefinition } from 'sanity'
 
-import blockContent from './blockContent';
-import product from './product';
-import occasion from './occasion';
-import productType from './productType';
+import blockContent from './blockContent'
+import category from './category'
+import occasion from './occasion'
+import product from './product'
 
-export const schemaTypes = [blockContent, product, occasion, productType];
+export const schemaTypes = [blockContent, product, occasion, category]
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blockContent, product, occasion, productType],
-};
+  types: [blockContent, product, occasion, category],
+}

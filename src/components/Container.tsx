@@ -8,7 +8,9 @@ export default function Container({ children }: { children: React.ReactNode }) {
         <div className="footer-body standard-padding-x">
           <p className="footer-brand">Cracking Good Gifts</p>
           <div className="footer-contact">
-            <a href="mailto:support@crackinggoodgifts.com">support@crackinggoodgifts.com</a>
+            <a href="mailto:support@crackinggoodgifts.com">
+              support@crackinggoodgifts.com
+            </a>
           </div>
         </div>
       </footer>
