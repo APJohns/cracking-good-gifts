@@ -5,13 +5,21 @@
   --font-family-sans: Inter;
   --font-family-display: Viaoda Libre;
 
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
-  /* --background-rgb: 214, 219, 220; */
+  --foreground: #000;
+  --background: #fff;
 
-  --accent1: #d5eaed;
-  --accent2: hsl(17, 87%, 75%);
-  --accent2-dark: hsl(17, 87%, 70%);
+  --accent1: #9BCDD2;
+  --accent2: hsl(44, 49%, 67%);
+  --accent2-dark: hsl(26, 87%, 70%);
+
+  --black: #000;
+  --white: #fff;
+
+  --red: hsl(353, 98%, 45%);
+  --yellow: hsl(51, 100%, 54%);
+  --cornflower: hsl(219, 41%, 42%);
+  --cornflower-50: hsl(219, 41%, 21%);
+  --cream: hsl(47, 29%, 94%);
 
   --fs-regular: 1.25rem;
   --fs-subtle: 1rem;
@@ -23,6 +31,13 @@
     --background-rgb: 0, 0, 0;
   }
 } */
+
+::selection {
+  background: var(--yellow); /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: var(--yellow); /* Gecko Browsers */
+}
 
 * {
   box-sizing: border-box;
@@ -39,8 +54,8 @@ body {
 body {
   font-size: var(--fs-regular);
   font-family: var(--font-family-sans);
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  color: var(--foreground);
+  background: var(--background);
 }
 
 a {
@@ -54,7 +69,7 @@ textarea {
 }
 
 .footer {
-  border-top: 1px solid #999;
+  border-top: 1px solid var(--cornflower-50);
 }
 
 .footer-body {

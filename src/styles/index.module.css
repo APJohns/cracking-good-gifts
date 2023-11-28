@@ -7,7 +7,7 @@
   border-bottom: 1px solid black;
   padding: 4rem 0.5rem;
   text-align: center;
-  background: var(--accent1);
+  background: var(--cream);
 }
 
 .title {
@@ -58,10 +58,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #999;
+  border: 1px solid var(--cornflower);
   padding: 1.5rem;
   height: 100%;
   text-align: center;
+}
+
+.category:hover {
+  color: var(--white);
+  background: var(--cornflower);
 }
 
 @media (min-width: 556px) {
