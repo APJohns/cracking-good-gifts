@@ -8,7 +8,7 @@
   --foreground: #000;
   --background: #fff;
 
-  --accent1: #9BCDD2;
+  --accent1: #9bcdd2;
   --accent2: hsl(44, 49%, 67%);
   --accent2-dark: hsl(26, 87%, 70%);
 
@@ -45,12 +45,6 @@
   margin: 0;
 }
 
-html,
-body {
-  min-width: 100vw;
-  overflow-x: hidden;
-}
-
 body {
   font-size: var(--fs-regular);
   font-family: var(--font-family-sans);
@@ -66,6 +60,28 @@ a {
 input,
 textarea {
   font-size: 1.25rem;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  padding: 4rem 0.5rem;
+  text-align: center;
+  background: var(--cream);
+}
+
+.title {
+  font-size: 1.75rem;
+}
+
+.tagline {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.4;
 }
 
 .footer {
@@ -92,9 +108,40 @@ textarea {
   font-size: var(--fs-subtle);
 }
 
+.product-page-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 2rem;
+  margin: 4rem auto;
+}
+
+.filters {
+  position: sticky;
+  top: 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.filter {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.filter input[type='checkbox'] {
+  background: #fff;
+}
+
 .standard-padding-x {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.constrained {
+  margin-left: auto;
+  margin-right: auto;
+  width: var(--app-width);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -120,6 +167,10 @@ textarea {
   :root {
     --app-width: 85vw;
   }
+
+  .product-page-layout {
+    grid-template-columns: auto 1fr;
+  }
 }
 @media (min-width: 992px) {
   :root {
@@ -132,7 +183,7 @@ textarea {
   }
 }
 @media (min-width: 1400px) {
-  :root {
+  /* :root {
     --app-width: 50vw;
-  }
+  } */
 }
