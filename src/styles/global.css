@@ -118,8 +118,6 @@ textarea {
 }
 
 .filters {
-  position: sticky;
-  top: 2rem;
   padding: 0.5rem 1rem;
 }
 
@@ -166,6 +164,11 @@ textarea {
 @media (min-width: 768px) {
   :root {
     --app-width: 85vw;
+  }
+
+  .filters {
+    position: sticky;
+    top: 2rem;
   }
 
   .product-page-layout {
