@@ -36,11 +36,13 @@ export default function Container({ heading, children }: Props) {
               <button
                 type="button"
                 className="cartBtn"
+                aria-haspopup="true"
+                aria-label={`${isCartOpen ? 'close' : 'open'} cart`}
                 onClick={() => setIsCartOpen(!isCartOpen)}
               >
                 <Cart />
               </button>
-              <div className={`cart${isCartOpen ? ' open' : ''}`}>
+              <div className={`cart${isCartOpen ? ' open' : ''}`} aria-expanded={isCartOpen}>
                 {Object.keys(cart).length > 0 ? (
                   <>
                     <ul>
@@ -62,6 +64,7 @@ export default function Container({ heading, children }: Props) {
                           <button
                             type="button"
                             className="cartItemRemove"
+                            aria-label='remove product from cart'
                             onClick={() => removeFromCart(item)}
                           >
                             <Remove />
