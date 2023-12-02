@@ -5,9 +5,6 @@
   list-style: none;
 }
 
-.nonFound {
-}
-
 @media (min-width: 556px) {
   .gallery {
     grid-template-columns: 1fr 1fr;

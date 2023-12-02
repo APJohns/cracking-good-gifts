@@ -23,6 +23,8 @@
 
   --fs-regular: 1.25rem;
   --fs-subtle: 1rem;
+
+  --padding-standard-x: 1rem;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -62,6 +64,122 @@ textarea {
   font-size: 1.25rem;
 }
 
+svg {
+  width: 1em;
+  height: 1em;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  display: block;
+  flex: 1;
+  margin-top: 1rem;
+  border: 0;
+  padding: 0.5rem;
+  color: var(--white);
+  text-align: center;
+  background: var(--cornflower);
+}
+
+.btn:hover {
+  background: var(--cornflower-50);
+}
+
+.btn:disabled {
+  cursor: unset;
+  color: var(--cornflower-50);
+  background: var(--cream);
+}
+
+.navPrimary {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem var(--padding-standard-x);
+  background: var(--cream);
+}
+
+.navPrimary .logo {
+  font-size: 2rem;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navList li {
+  list-style: none;
+}
+
+.cartBtn {
+  cursor: pointer;
+  border: 0;
+  font-size: 1.5rem;
+  color: var(--black);
+  background: transparent;
+}
+
+.cartContainer {
+  position: relative;
+}
+
+.cart.open {
+  display: block;
+}
+
+.cart {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: 20rem;
+  font-size: var(--fs-subtle);
+  background: var(--white);
+  z-index: 10;
+}
+
+.cartEmpty {
+  text-align: center;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cartItem:not(:first-of-type) {
+  margin-top: 1rem;
+}
+
+.cartItemTitle {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.cartItemRemove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-regular);
+  border: 0;
+  background: transparent;
+}
+
+.cartCheckout {
+}
+
+.page-heading {
+  margin-top: 4rem;
+  border-bottom: 1px solid #ccc;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -85,7 +203,7 @@ textarea {
 }
 
 .footer {
-  border-top: 1px solid var(--cornflower-50);
+  border-top: 1px solid #ccc;
 }
 
 .footer-body {
@@ -132,8 +250,8 @@ textarea {
 }
 
 .standard-padding-x {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: var(--padding-standard-x);
+  padding-right: var(--padding-standard-x);
 }
 
 .constrained {

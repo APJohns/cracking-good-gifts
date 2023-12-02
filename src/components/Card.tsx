@@ -1,24 +1,19 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
+import useCart from '~/hooks/useCart'
 import { urlForImage } from '~/lib/sanity.image'
 import { type Product } from '~/lib/sanity.queries'
 import styles from '~/styles/card.module.css'
+import { addToCart } from '~/utils'
 
 export default function Card({ product }: { product: Product }) {
-
-  const [inCart, setInCart] = useState(false);
-
-  const addToCart = () => {
-    localStorage.setItem(product._id, JSON.stringify(product));
-    setInCart(true);
-  }
+  const cart = useCart()
+  const [inCart, setInCart] = useState(false)
 
   useEffect(() => {
-    if (localStorage.getItem(product._id)) {
-      setInCart(true);
-    }
-  }, []);
+    setInCart(!!cart[product._id])
+  }, [cart, product._id])
 
   return (
     <div className={styles.card}>
@@ -41,7 +36,12 @@ export default function Card({ product }: { product: Product }) {
           <p className={styles.price}>${product.price}</p>
         </div>
         <div className={styles.addToCart}>
-          <button onClick={addToCart} disabled={inCart}>
+          <button
+            type="button"
+            className="btn"
+            disabled={inCart}
+            onClick={() => addToCart(product)}
+          >
             {inCart ? '✔' : 'Add to Cart'}
           </button>
         </div>

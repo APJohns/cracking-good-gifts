@@ -42,21 +42,3 @@
   display: flex;
   gap: 1rem;
 }
-
-.addToCart button {
-  cursor: pointer;
-  flex: 1;
-  margin-top: 1rem;
-  border: 0;
-  padding: 0.5rem;
-  background: var(--cornflower);
-}
-
-.addToCart button:hover {
-  background: var(--cornflower-50);
-}
-
-.addToCart button:disabled {
-  cursor: unset;
-  background: var(--cream);
-}

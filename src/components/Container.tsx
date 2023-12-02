@@ -1,39 +1,89 @@
 import { Viaoda_Libre } from 'next/font/google'
+import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+import useCart from '~/hooks/useCart'
+import { urlForImage } from '~/lib/sanity.image'
+import { getCart, removeFromCart } from '~/utils'
+
+import Cart from './icons/Cart'
+import Remove from './icons/Remove'
 
 const viaoda = Viaoda_Libre({ weight: '400', subsets: ['latin'] })
 
 interface Props {
-  isConstrained?: boolean
-  hasTagline?: boolean
+  hasNav?: boolean
   heading?: string
   children: React.ReactNode
 }
 
-export default function Container({
-  isConstrained = true,
-  hasTagline = true,
-  heading,
-  children,
-}: Props) {
+export default function Container({ heading, children }: Props) {
+  const cart = useCart()
+  const [isCartOpen, setIsCartOpen] = useState(false)
+
   return (
     <div className="container">
-      <header className="hero">
-        <Link href="/" className={`title ${viaoda.className}`}>
-          {heading ? <p>Cracking Good Gifts</p> : <h1>Cracking Good Gifts</h1>}
-        </Link>
-        {hasTagline && (
-          <p className="tagline">
-            Crafting a better world
-            <br />
-            One gift at a time
-          </p>
-        )}
-        {heading && <h1 className="heading">{heading}</h1>}
+      <header className="header">
+        <nav className="navPrimary">
+          <Link href="/" className={`logo ${viaoda.className}`}>
+            Cracking Good Gifts
+          </Link>
+          <ul className="navList">
+            {/* TODO: Uncomment link when all rpoducts page is setup */}
+            {/* <li><Link href="/products">Shop</Link></li> */}
+            <li className="cartContainer">
+              <button
+                type="button"
+                className="cartBtn"
+                onClick={() => setIsCartOpen(!isCartOpen)}
+              >
+                <Cart />
+              </button>
+              <div className={`cart${isCartOpen ? ' open' : ''}`}>
+                {Object.keys(cart).length > 0 ? (
+                  <>
+                    <ul>
+                      {Object.keys(cart).map((item) => (
+                        <li key={cart[item]._id} className="cartItem">
+                          <Image
+                            className="cartItemImage"
+                            src={urlForImage(cart[item].image)
+                              .width(75)
+                              .height(75)
+                              .url()}
+                            height={75}
+                            width={75}
+                            alt=""
+                          />
+                          <div className="cartItemTitle">
+                            {cart[item].title}
+                          </div>
+                          <button
+                            type="button"
+                            className="cartItemRemove"
+                            onClick={() => removeFromCart(item)}
+                          >
+                            <Remove />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link href="/checkout" className="btn cartCheckout">
+                      Checkout
+                    </Link>
+                  </>
+                ) : (
+                  <p className="cartEmpty">Your cart is empty</p>
+                )}
+              </div>
+            </li>
+          </ul>
+        </nav>
+        {heading && <h1 className="standard-padding-x">{heading}</h1>}
       </header>
-      <main className={isConstrained ? 'constrained' : undefined}>
-        {children}
-      </main>
+      {/* {heading && <h1 className="heading">{heading}</h1>} */}
+      <main>{children}</main>
       <footer className="footer">
         <div className="footer-body standard-padding-x">
           <p className="footer-brand">Cracking Good Gifts</p>

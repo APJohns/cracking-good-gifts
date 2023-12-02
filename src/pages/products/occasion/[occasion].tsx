@@ -1,25 +1,25 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { useRouter } from 'next/router'
 import { useLiveQuery } from 'next-sanity/preview'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import Container from '~/components/Container'
 import ProductList from '~/components/ProductList'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import {
+  byTypeAndSlugQuery,
+  categoriesQuery,
+  type Category,
+  getByTypeAndSlug,
+  getCategories,
+  getProductsByFilters,
+  getProductsByOccasion,
+  type Occasion,
   type Product,
   productsByOccasionQuery,
-  type Category,
-  type Occasion,
-  byTypeAndSlugQuery,
-  getProductsByFilters,
-  getCategories,
-  categoriesQuery,
-  getByTypeAndSlug,
-  getProductsByOccasion,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
-import { ChangeEvent, useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps<
   SharedPageProps & {
@@ -55,7 +55,10 @@ export default function OccasionPage(
     productsByOccasionQuery,
   )
 
-  const [categories] = useLiveQuery<Occasion[]>(props.categories, categoriesQuery)
+  const [categories] = useLiveQuery<Occasion[]>(
+    props.categories,
+    categoriesQuery,
+  )
 
   const [occasion] = useLiveQuery<Category>(props.occasion, byTypeAndSlugQuery)
 
@@ -94,7 +97,8 @@ export default function OccasionPage(
   }, [filters, products, props.draftMode, props.token, router.query.occasion])
 
   return (
-    <Container hasTagline={false} heading={occasion.title}>
+    <Container>
+      <h1 className="page-heading standard-padding-x">{occasion.title}</h1>
       <section className="standard-padding-x product-page-layout">
         <fieldset className="filters">
           <legend>Categories</legend>
