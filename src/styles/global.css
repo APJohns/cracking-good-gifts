@@ -169,6 +169,7 @@ button {
   justify-content: center;
   font-size: var(--fs-regular);
   border: 0;
+  color: var(--black);
   background: transparent;
 }
 
