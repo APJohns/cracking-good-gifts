@@ -1,11 +1,11 @@
 import { Viaoda_Libre } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import useCart from '~/hooks/useCart'
 import { urlForImage } from '~/lib/sanity.image'
-import { getCart, removeFromCart } from '~/utils'
+import { removeFromCart } from '~/utils'
 
 import Cart from './icons/Cart'
 import Remove from './icons/Remove'
@@ -42,7 +42,10 @@ export default function Container({ heading, children }: Props) {
               >
                 <Cart />
               </button>
-              <div className={`cart${isCartOpen ? ' open' : ''}`} aria-expanded={isCartOpen}>
+              <div
+                className={`cart${isCartOpen ? ' open' : ''}`}
+                aria-expanded={isCartOpen}
+              >
                 {Object.keys(cart).length > 0 ? (
                   <>
                     <ul>
@@ -58,13 +61,16 @@ export default function Container({ heading, children }: Props) {
                             width={75}
                             alt=""
                           />
-                          <div className="cartItemTitle">
-                            {cart[item].title}
+                          <div className="cartItemDetails">
+                            <p className="cartItemTitle">{cart[item].title}</p>
+                            <p aria-label={`Quantity: ${cart[item].quantity}`}>
+                              Qty: {cart[item].quantity}
+                            </p>
                           </div>
                           <button
                             type="button"
                             className="cartItemRemove"
-                            aria-label='remove product from cart'
+                            aria-label="remove product from cart"
                             onClick={() => removeFromCart(item)}
                           >
                             <Remove />

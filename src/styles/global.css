@@ -76,7 +76,6 @@ button {
 .btn {
   display: block;
   flex: 1;
-  margin-top: 1rem;
   border: 0;
   padding: 0.5rem;
   color: var(--white);
@@ -158,9 +157,13 @@ button {
   margin-top: 1rem;
 }
 
-.cartItemTitle {
+.cartItemDetails {
   flex: 1;
   padding: 0 1rem;
+}
+
+.cartItemTitle {
+  font-weight: 600;
 }
 
 .cartItemRemove {
@@ -174,6 +177,7 @@ button {
 }
 
 .cartCheckout {
+  margin-top: 1rem;
 }
 
 .page-heading {

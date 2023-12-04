@@ -1,0 +1,28 @@
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.product {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  list-style: none;
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-subtle);
+}
+
+.productPrice {
+  font-weight: 600;
+}
+
+.productRemove {
+  margin-left: auto;
+}

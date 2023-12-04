@@ -14,11 +14,24 @@ export function getCart() {
   }
 }
 
-export function addToCart(product) {
+export function addToCart(product, quantity = 1) {
   const cart = getCart()
-  cart[product._id] = product
+  cart[product._id] = {
+    ...product,
+    quantity,
+  }
   localStorage.setItem('cart', JSON.stringify(cart))
   dispatchEvent(new Event('storage'))
+  return cart
+}
+
+export function updateQuantity(productId, quantity) {
+  const cart = getCart()
+  if (cart[productId]) {
+    cart[productId].quantity = quantity
+    localStorage.setItem('cart', JSON.stringify(cart))
+    dispatchEvent(new Event('storage'))
+  }
   return cart
 }
 

@@ -1,15 +1,19 @@
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import useCart from '~/hooks/useCart'
 import { urlForImage } from '~/lib/sanity.image'
 import { type Product } from '~/lib/sanity.queries'
 import styles from '~/styles/card.module.css'
-import { addToCart } from '~/utils'
+import { addToCart, updateQuantity } from '~/utils'
+
+import InputQuantity from './InputQuantity'
 
 export default function Card({ product }: { product: Product }) {
   const cart = useCart()
   const [inCart, setInCart] = useState(false)
+
+  const quantityRef = useRef(null)
 
   useEffect(() => {
     setInCart(!!cart[product._id])
@@ -36,11 +40,19 @@ export default function Card({ product }: { product: Product }) {
           <p className={styles.price}>${product.price}</p>
         </div>
         <div className={styles.addToCart}>
+          <InputQuantity
+            ref={quantityRef}
+            onChange={() =>
+              updateQuantity(product._id, quantityRef.current.value)
+            }
+          />
           <button
             type="button"
             className="btn"
             disabled={inCart}
-            onClick={() => addToCart(product)}
+            onClick={() =>
+              addToCart(product, Number(quantityRef.current.value))
+            }
           >
             {inCart ? '✔' : 'Add to Cart'}
           </button>
