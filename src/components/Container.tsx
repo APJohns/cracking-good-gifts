@@ -90,7 +90,6 @@ export default function Container({ heading, children }: Props) {
         </nav>
         {heading && <h1 className="standard-padding-x">{heading}</h1>}
       </header>
-      {/* {heading && <h1 className="heading">{heading}</h1>} */}
       <main>{children}</main>
       <footer className="footer">
         <div className="footer-body standard-padding-x">
