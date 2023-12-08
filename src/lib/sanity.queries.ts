@@ -58,6 +58,11 @@ export const productSlugsQuery = groq`
 *[_type == "product" && defined(slug.current)][].slug.current
 `
 
+interface Reference {
+  _ref: string
+  _type: 'reference'
+}
+
 export interface Product {
   _type: 'product'
   _id: string
@@ -66,6 +71,8 @@ export interface Product {
   price: number
   description?: string
   image: ImageAsset
+  category: Reference
+  occasion: Reference
 }
 
 // Category
@@ -81,6 +88,15 @@ export const categoriesQuery = groq`*[_type == "category" && defined(slug.curren
 
 export async function getCategories(client: SanityClient): Promise<Category[]> {
   return await client.fetch(categoriesQuery)
+}
+
+export const categoryByIdQuery = groq`*[_type == "category" && category._id == $categoryId]`
+
+export async function getCategoryById(
+  client: SanityClient,
+  categoryId: string,
+): Promise<Category> {
+  return await client.fetch(categoryByIdQuery)
 }
 
 // Occasion

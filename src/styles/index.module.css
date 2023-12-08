@@ -38,7 +38,13 @@
   border: 1px solid var(--cornflower);
   padding: 1.5rem;
   height: 100%;
+  color: var(--black);
   text-align: center;
+  text-decoration: none;
+}
+
+.category:visited {
+  color: var(--black);
 }
 
 .category:hover {

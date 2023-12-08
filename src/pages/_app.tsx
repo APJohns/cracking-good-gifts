@@ -3,12 +3,20 @@ import '~/styles/global.css'
 import type { AppProps } from 'next/app'
 import {
   IBM_Plex_Mono,
-  Inter,
   Montserrat,
   PT_Serif,
   Viaoda_Libre,
 } from 'next/font/google'
-import { lazy } from 'react'
+import {
+  createContext,
+  Dispatch,
+  lazy,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react'
+
+import { type Product } from '~/lib/sanity.queries'
 
 export interface SharedPageProps {
   draftMode: boolean
@@ -16,6 +24,24 @@ export interface SharedPageProps {
 }
 
 const PreviewProvider = lazy(() => import('~/components/PreviewProvider'))
+
+interface ProductExtended extends Product {
+  quantity: number
+}
+
+interface Cart {
+  [key: string]: ProductExtended
+}
+
+interface CartContextI {
+  cart: Cart
+  setCart: Dispatch<SetStateAction<Cart>>
+  addToCart: (product: Product, quantity?: number) => Cart
+  removeFromCart: (productId: string) => Cart
+  updateQuantity: (productId: string, quantity: number) => Cart
+}
+
+export const CartContext = createContext<CartContextI>(null)
 
 const mono = IBM_Plex_Mono({
   variable: '--font-family-mono',
@@ -47,8 +73,49 @@ export default function App({
   pageProps,
 }: AppProps<SharedPageProps>) {
   const { draftMode, token } = pageProps
+
+  const [cart, setCart] = useState<Cart>({})
+
+  const addToCart = (product, quantity = 1) => {
+    const tempCart = { ...cart }
+    tempCart[product._id] = {
+      ...product,
+      quantity,
+    }
+    setCart(tempCart)
+    return cart
+  }
+
+  const updateQuantity = (productId, quantity) => {
+    const tempCart = { ...cart }
+    if (tempCart[productId] && quantity !== cart[productId].quantity) {
+      tempCart[productId].quantity = quantity
+      setCart(tempCart)
+    }
+    return cart
+  }
+
+  const removeFromCart = (productId) => {
+    const tempCart = { ...cart }
+    delete tempCart[productId]
+    setCart(tempCart)
+    return cart
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+
   return (
-    <>
+    <CartContext.Provider
+      value={{ cart, setCart, addToCart, removeFromCart, updateQuantity }}
+    >
       <style jsx global>
         {`
           :root {
@@ -66,6 +133,6 @@ export default function App({
       ) : (
         <Component {...pageProps} />
       )}
-    </>
+    </CartContext.Provider>
   )
 }

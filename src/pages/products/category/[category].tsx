@@ -93,7 +93,8 @@ export default function CategoryPage(
   }, [filters, products, props.draftMode, props.token, router.query.category])
 
   return (
-    <Container hasTagline={false} heading={category.title}>
+    <Container>
+      <h1 className="page-heading standard-padding-x">{category.title}</h1>
       <section className="standard-padding-x product-page-layout">
         <fieldset className="filters">
           <legend>Occasions</legend>

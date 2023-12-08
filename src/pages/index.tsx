@@ -1,4 +1,5 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Viaoda_Libre } from 'next/font/google'
 import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
@@ -15,6 +16,8 @@ import {
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import styles from '~/styles/index.module.css'
+
+const viaoda = Viaoda_Libre({ weight: '400', subsets: ['latin'] })
 
 export const getServerSideProps: GetServerSideProps<
   SharedPageProps & {
@@ -44,8 +47,17 @@ export default function IndexPage(
     categoriesQuery,
   )
   const [occasions] = useLiveQuery<Occasion[]>(props.occasions, occasionsQuery)
+
   return (
     <Container>
+      <header className="hero">
+        <h1 className={viaoda.className}>Cracking Good Gifts</h1>
+        <p className="tagline">
+          Crafting a better world
+          <br />
+          One gift at a time
+        </p>
+      </header>
       <section className={`${styles.categories} standard-padding-x`}>
         <h2>Shop by Category</h2>
         <nav>
