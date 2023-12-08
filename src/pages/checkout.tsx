@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
-import { useContext, useEffect, useState } from 'react'
+import { FormEvent, useContext, useEffect, useRef, useState } from 'react'
 
 import Container from '~/components/Container'
 import Remove from '~/components/icons/Remove'
@@ -33,9 +33,10 @@ export const getServerSideProps: GetServerSideProps<
 export default function Checkout(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
-  const { cart, removeFromCart, updateQuantity } = useContext(CartContext)
+  const { cart, setCart, removeFromCart, updateQuantity } = useContext(CartContext)
 
   const [orderId, setOrderId] = useState<number>()
+  const formRef = useRef<HTMLFormElement>(null)
 
   const getTotal = () => {
     return Object.keys(cart).reduce(
@@ -62,8 +63,13 @@ export default function Checkout(
         )}) $${cart[product].price}ea`,
     )
     products.push(`Total: $${getTotal()}`)
-    console.log(products.join('\n'))
     return products.join('\n')
+  }
+
+  const submitForm = (e: FormEvent) => {
+    e.preventDefault();
+    formRef.current.submit()
+    setCart({})
   }
 
   useEffect(() => {
@@ -76,8 +82,8 @@ export default function Checkout(
       <div className={`${styles.checkoutLayout} standard-padding-x`}>
         <section className={styles.orderSummary}>
           <h2>Order Summary</h2>
-          <dl>
-            <dt>Order ID:</dt>
+          <dl className={styles.orderId}>
+            <dt className={styles.dt}>Order ID:</dt>
             <dd>{orderId}</dd>
           </dl>
           <ul className={styles.orderList}>
@@ -115,9 +121,9 @@ export default function Checkout(
               </li>
             ))}
           </ul>
-          <dl>
-            <dt>Total</dt>
-            <dd>${getTotal()}</dd>
+          <dl className={styles.totalPrice}>
+            <dt className={styles.dt}>Total:</dt>
+            <dd className={styles.dd}>${getTotal()}</dd>
           </dl>
         </section>
         <section>
@@ -131,7 +137,7 @@ export default function Checkout(
             </a>
             .
           </p>
-          <form action="https://usebasin.com/f/c2d55604b0ee" method="POST" className={styles.orderForm}>
+          <form ref={formRef} action="https://usebasin.com/f/c2d55604b0ee" method="POST" className={styles.orderForm}>
             <input type="hidden" name="id" value={orderId} />
             <input type="hidden" name="order" value={stringifyCart()} />
             <div className={styles.orderFormGrid}>
@@ -145,13 +151,13 @@ export default function Checkout(
               </label>
               <label className={styles.orderFormControl}>
                 <div className={styles.formControlLabel}>Address</div>
-                <textarea name="address" required />
+                <textarea name="address" rows={4} required />
               </label>
               <label className={styles.orderFormControl}>
                 <div className={styles.formControlLabel}>Notes</div>
-                <textarea name="notes" />
+                <textarea name="notes" rows={4} />
               </label>
-              <button type="submit" className='btn'>Submit Order</button>
+              <button type="submit" className={`btn ${styles.submitButton}`} onClick={submitForm}>Submit Order</button>
             </div>
           </form>
         </section>
