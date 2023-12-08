@@ -12,6 +12,7 @@ import { Category, getCategories } from '~/lib/sanity.queries'
 import styles from '~/styles/checkout.module.css'
 
 import { CartContext, SharedPageProps } from './_app'
+import Script from 'next/script'
 
 export const getServerSideProps: GetServerSideProps<
   SharedPageProps & {
@@ -78,6 +79,7 @@ export default function Checkout(
 
   return (
     <Container>
+      <Script src="https://www.google.com/recaptcha/api.js" async defer />
       <h1 className="page-heading standard-padding-x">Checkout</h1>
       <div className={`${styles.checkoutLayout} standard-padding-x`}>
         <section className={styles.orderSummary}>
@@ -158,11 +160,12 @@ export default function Checkout(
                 <textarea name="notes" rows={4} />
               </label>
               <label className={styles.acknowledge}>
-                <input type="checkbox" name="acknowledge" />
+                <input type="checkbox" name="acknowledge" required />
                 <span>I acknowledge that my order will not be fulfilled until a donation equal to the total amount is made to our <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
                   Dana-Farber fundraiser page
                 </a>.</span>
               </label>
+              <div className="g-recaptcha" data-sitekey="6Lew3SMUAAAAAJ82QoS7gqOTkRI_dhYrFy1f7Sqy"></div>
               <button type="submit" className={`btn ${styles.submitButton}`} onClick={submitForm}>Submit Order</button>
             </div>
           </form>
