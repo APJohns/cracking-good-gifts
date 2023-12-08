@@ -7,7 +7,15 @@ import {
   PT_Serif,
   Viaoda_Libre,
 } from 'next/font/google'
-import { Dispatch, SetStateAction, createContext, lazy, useEffect, useState } from 'react'
+import {
+  createContext,
+  Dispatch,
+  lazy,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react'
+
 import { type Product } from '~/lib/sanity.queries'
 
 export interface SharedPageProps {
@@ -33,7 +41,7 @@ interface CartContextI {
   updateQuantity: (productId: string, quantity: number) => Cart
 }
 
-export const CartContext = createContext<CartContextI>(null);
+export const CartContext = createContext<CartContextI>(null)
 
 const mono = IBM_Plex_Mono({
   variable: '--font-family-mono',
@@ -66,10 +74,10 @@ export default function App({
 }: AppProps<SharedPageProps>) {
   const { draftMode, token } = pageProps
 
-  const [cart, setCart] = useState<Cart>({});
+  const [cart, setCart] = useState<Cart>({})
 
   const addToCart = (product, quantity = 1) => {
-    const tempCart = {...cart}
+    const tempCart = { ...cart }
     tempCart[product._id] = {
       ...product,
       quantity,
@@ -79,7 +87,7 @@ export default function App({
   }
 
   const updateQuantity = (productId, quantity) => {
-    const tempCart = {...cart}
+    const tempCart = { ...cart }
     if (tempCart[productId] && quantity !== cart[productId].quantity) {
       tempCart[productId].quantity = quantity
       setCart(tempCart)
@@ -88,7 +96,7 @@ export default function App({
   }
 
   const removeFromCart = (productId) => {
-    const tempCart = {...cart}
+    const tempCart = { ...cart }
     delete tempCart[productId]
     setCart(tempCart)
     return cart
@@ -105,7 +113,9 @@ export default function App({
   }, [cart])
 
   return (
-    <CartContext.Provider value={{cart, setCart, addToCart, removeFromCart, updateQuantity}}>
+    <CartContext.Provider
+      value={{ cart, setCart, addToCart, removeFromCart, updateQuantity }}
+    >
       <style jsx global>
         {`
           :root {

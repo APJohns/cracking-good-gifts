@@ -1,15 +1,41 @@
 import Image from 'next/image'
-import { useContext } from 'react'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+import { useContext, useEffect, useState } from 'react'
 
 import Container from '~/components/Container'
 import Remove from '~/components/icons/Remove'
 import InputQuantity from '~/components/InputQuantity'
+import { readToken } from '~/lib/sanity.api'
+import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
+import { Category, getCategories } from '~/lib/sanity.queries'
 import styles from '~/styles/checkout.module.css'
-import { CartContext } from './_app'
 
-export default function Checkout() {
-  const {cart, removeFromCart, updateQuantity} = useContext(CartContext)
+import { CartContext, SharedPageProps } from './_app'
+
+export const getServerSideProps: GetServerSideProps<
+  SharedPageProps & {
+    categories: Category[]
+  }
+> = async ({ draftMode = false }) => {
+  const client = getClient(draftMode ? { token: readToken } : undefined)
+  const categories = await getCategories(client)
+
+  return {
+    props: {
+      draftMode,
+      token: draftMode ? readToken : '',
+      categories,
+    },
+  }
+}
+
+export default function Checkout(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>,
+) {
+  const { cart, removeFromCart, updateQuantity } = useContext(CartContext)
+
+  const [orderId, setOrderId] = useState<number>()
 
   const getTotal = () => {
     return Object.keys(cart).reduce(
@@ -24,11 +50,35 @@ export default function Checkout() {
     }
   }
 
+  const stringifyCart = (): string => {
+    const findCategoryById = (categoryId: string): string => {
+      return props.categories.find((category) => category._id === categoryId)
+        .title
+    }
+    const products = Object.keys(cart).map(
+      (product) =>
+        `${cart[product].quantity}x ${cart[product].title} (${findCategoryById(
+          cart[product].category._ref,
+        )}) $${cart[product].price}ea`,
+    )
+    products.push(`Total: $${getTotal()}`)
+    console.log(products.join('\n'))
+    return products.join('\n')
+  }
+
+  useEffect(() => {
+    setOrderId(Date.now())
+  }, [])
+
   return (
     <Container>
       <h1 className="page-heading standard-padding-x">Checkout</h1>
       <section className="standard-padding-x">
         <h2>Order Summary</h2>
+        <dl>
+          <dt>Order ID:</dt>
+          <dd>{orderId}</dd>
+        </dl>
         <ul className={styles.orderList}>
           {Object.keys(cart).map((product) => (
             <li key={cart[product]._id} className={styles.product}>
@@ -72,12 +122,34 @@ export default function Checkout() {
         <h2>Submit Order</h2>
         <p>
           We are currently only accepting payment via donation. Your order will
-          not be fulfilled until a donation of the amount quoted here is made to our{' '}
+          not be fulfilled until a donation of the amount quoted here is made to
+          our{' '}
           <a href="http://danafarber.jimmyfund.org/goto/DavidJohns">
             Dana-Farber fundraiser page
           </a>
           .
         </p>
+        <form action="https://usebasin.com/f/c2d55604b0ee" method="POST">
+          <input type="hidden" name="id" value={orderId} />
+          <input type="hidden" name="order" value={stringifyCart()} />
+          <label>
+            <div>Name</div>
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            <div>Email</div>
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            <div>Address</div>
+            <textarea name="address" required />
+          </label>
+          <label>
+            <div>Notes</div>
+            <textarea name="notes" />
+          </label>
+          <button type="submit">Submit Order</button>
+        </form>
       </section>
     </Container>
   )

@@ -3,13 +3,13 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import { urlForImage } from '~/lib/sanity.image'
 import { type Product } from '~/lib/sanity.queries'
+import { CartContext } from '~/pages/_app'
 import styles from '~/styles/card.module.css'
 
 import InputQuantity from './InputQuantity'
-import { CartContext } from '~/pages/_app'
 
 export default function Card({ product }: { product: Product }) {
-  const {cart, addToCart, updateQuantity} = useContext(CartContext)
+  const { cart, addToCart, updateQuantity } = useContext(CartContext)
   const [inCart, setInCart] = useState(false)
 
   const quantityRef = useRef(null)

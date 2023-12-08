@@ -2,7 +2,6 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { Viaoda_Libre } from 'next/font/google'
 import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
-import { useEffect } from 'react'
 
 import Container from '~/components/Container'
 import { readToken } from '~/lib/sanity.api'

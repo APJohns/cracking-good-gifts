@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { useContext, useState } from 'react'
 
 import { urlForImage } from '~/lib/sanity.image'
+import { CartContext } from '~/pages/_app'
 
 import Cart from './icons/Cart'
 import Remove from './icons/Remove'
-import { CartContext } from '~/pages/_app'
 
 const viaoda = Viaoda_Libre({ weight: '400', subsets: ['latin'] })
 
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function Container({ heading, children }: Props) {
-  const {cart, removeFromCart} = useContext(CartContext)
+  const { cart, removeFromCart } = useContext(CartContext)
   const [isCartOpen, setIsCartOpen] = useState(false)
 
   return (
