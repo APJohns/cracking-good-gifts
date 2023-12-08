@@ -82,6 +82,14 @@
   width: 100%;
 }
 
+.acknowledge {
+  font-size: var(--fs-subtle);
+}
+
+.acknowledge input {
+  margin-right: 0.5rem;
+}
+
 .submitButton {
   font-size: var(--fs-regular);
 }
@@ -101,6 +109,10 @@
 
   .checkoutLayout {
     grid-template-columns: 1fr 2fr;
+  }
+
+  .acknowledge {
+    grid-column: span 2;
   }
 
   .submitButton {

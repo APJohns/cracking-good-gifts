@@ -128,15 +128,15 @@ export default function Checkout(
         </section>
         <section>
           <h2>Submit Order</h2>
-          <p>
-            We are currently only accepting payment via donation. Your order will
-            not be fulfilled until a donation of the amount quoted here is made to
+          <p className="p">
+            We are currently only accepting payment via donation. Your order <strong>will not</strong> be fulfilled until a donation of the amount quoted here is made to
             our{' '}
             <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
               Dana-Farber fundraiser page
             </a>
             .
           </p>
+          <p className="p"><strong>Please provide your order number</strong> in the "Personal Note" field of the donation form. Also use the same name for the donation as used here.</p>
           <form ref={formRef} action="https://usebasin.com/f/c2d55604b0ee" method="POST" className={styles.orderForm}>
             <input type="hidden" name="id" value={orderId} />
             <input type="hidden" name="order" value={stringifyCart()} />
@@ -156,6 +156,12 @@ export default function Checkout(
               <label className={styles.orderFormControl}>
                 <div className={styles.formControlLabel}>Notes</div>
                 <textarea name="notes" rows={4} />
+              </label>
+              <label className={styles.acknowledge}>
+                <input type="checkbox" name="acknowledge" />
+                <span>I acknowledge that my order will not be fulfilled until a donation equal to the total amount is made to our <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
+                  Dana-Farber fundraiser page
+                </a>.</span>
               </label>
               <button type="submit" className={`btn ${styles.submitButton}`} onClick={submitForm}>Submit Order</button>
             </div>

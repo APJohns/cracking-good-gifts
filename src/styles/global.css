@@ -80,6 +80,14 @@ button {
   cursor: pointer;
 }
 
+strong {
+  font-weight: 600;
+}
+
+.p {
+  margin-top: 1rem;
+}
+
 .btn {
   display: block;
   flex: 1;
@@ -322,8 +330,4 @@ button {
     --app-width: 75vw;
   }
 }
-@media (min-width: 1400px) {
-  /* :root {
-    --app-width: 50vw;
-  } */
-}
+@media (min-width: 1400px) {}
