@@ -73,84 +73,89 @@ export default function Checkout(
   return (
     <Container>
       <h1 className="page-heading standard-padding-x">Checkout</h1>
-      <section className="standard-padding-x">
-        <h2>Order Summary</h2>
-        <dl>
-          <dt>Order ID:</dt>
-          <dd>{orderId}</dd>
-        </dl>
-        <ul className={styles.orderList}>
-          {Object.keys(cart).map((product) => (
-            <li key={cart[product]._id} className={styles.product}>
-              <Image
-                className="cartItemImage"
-                src={urlForImage(cart[product].image)
-                  .width(100)
-                  .height(100)
-                  .url()}
-                height={100}
-                width={100}
-                alt=""
-              />
-              <div className={styles.productDetails}>
-                <p className={styles.productPrice}>
-                  ${cart[product].price * cart[product].quantity}
-                </p>
-                <p>{cart[product].title}</p>
-                <InputQuantity
-                  defaultValue={Number(cart[product].quantity)}
-                  onChange={(quantity) => handleChange(product, quantity)}
+      <div className={`${styles.checkoutLayout} standard-padding-x`}>
+        <section className={styles.orderSummary}>
+          <h2>Order Summary</h2>
+          <dl>
+            <dt>Order ID:</dt>
+            <dd>{orderId}</dd>
+          </dl>
+          <ul className={styles.orderList}>
+            {Object.keys(cart).map((product) => (
+              <li key={cart[product]._id} className={styles.product}>
+                <Image
+                  className="cartItemImage"
+                  src={urlForImage(cart[product].image)
+                    .width(100)
+                    .height(100)
+                    .url()}
+                  height={100}
+                  width={100}
+                  alt=""
                 />
-              </div>
-              <button
-                type="button"
-                className={`cartItemRemove ${styles.productRemove}`}
-                aria-label="remove product from cart"
-                onClick={() => removeFromCart(product)}
-              >
-                <Remove />
-              </button>
-            </li>
-          ))}
-        </ul>
-        <dl>
-          <dt>Total</dt>
-          <dd>${getTotal()}</dd>
-        </dl>
-      </section>
-      <section className="standard-padding-x">
-        <h2>Submit Order</h2>
-        <p>
-          We are currently only accepting payment via donation. Your order will
-          not be fulfilled until a donation of the amount quoted here is made to
-          our{' '}
-          <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
-            Dana-Farber fundraiser page
-          </a>
-          .
-        </p>
-        <form action="https://usebasin.com/f/c2d55604b0ee" method="POST">
-          <input type="hidden" name="id" value={orderId} />
-          <input type="hidden" name="order" value={stringifyCart()} />
-          <label>
-            <div>Name</div>
-            <input type="text" name="name" required />
-          </label>
-          <label>
-            <div>Email</div>
-            <input type="email" name="email" required />
-          </label>
-          <label>
-            <div>Address</div>
-            <textarea name="address" required />
-          </label>
-          <label>
-            <div>Notes</div>
-            <textarea name="notes" />
-          </label>
-          <button type="submit">Submit Order</button>
-        </form>
-      </section>
+                <div className={styles.productDetails}>
+                  <p className={styles.productPrice}>
+                    ${cart[product].price * cart[product].quantity}
+                  </p>
+                  <p>{cart[product].title}</p>
+                  <InputQuantity
+                    className={styles.productQuantity}
+                    defaultValue={Number(cart[product].quantity)}
+                    onChange={(quantity) => handleChange(product, quantity)}
+                  />
+                </div>
+                <button
+                  type="button"
+                  className={`cartItemRemove ${styles.productRemove}`}
+                  aria-label="remove product from cart"
+                  onClick={() => removeFromCart(product)}
+                >
+                  <Remove />
+                </button>
+              </li>
+            ))}
+          </ul>
+          <dl>
+            <dt>Total</dt>
+            <dd>${getTotal()}</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Submit Order</h2>
+          <p>
+            We are currently only accepting payment via donation. Your order will
+            not be fulfilled until a donation of the amount quoted here is made to
+            our{' '}
+            <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
+              Dana-Farber fundraiser page
+            </a>
+            .
+          </p>
+          <form action="https://usebasin.com/f/c2d55604b0ee" method="POST" className={styles.orderForm}>
+            <input type="hidden" name="id" value={orderId} />
+            <input type="hidden" name="order" value={stringifyCart()} />
+            <div className={styles.orderFormGrid}>
+              <label className={styles.orderFormControl}>
+                <div className={styles.formControlLabel}>Name</div>
+                <input type="text" name="name" required />
+              </label>
+              <label className={styles.orderFormControl}>
+                <div className={styles.formControlLabel}>Email</div>
+                <input type="email" name="email" required />
+              </label>
+              <label className={styles.orderFormControl}>
+                <div className={styles.formControlLabel}>Address</div>
+                <textarea name="address" required />
+              </label>
+              <label className={styles.orderFormControl}>
+                <div className={styles.formControlLabel}>Notes</div>
+                <textarea name="notes" />
+              </label>
+              <button type="submit" className='btn'>Submit Order</button>
+            </div>
+          </form>
+        </section>
+      </div>
     </Container>
   )
 }

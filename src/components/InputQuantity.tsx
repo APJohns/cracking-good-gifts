@@ -2,9 +2,7 @@ import {
   ChangeEvent,
   ForwardedRef,
   forwardRef,
-  InputHTMLAttributes,
   useEffect,
-  useImperativeHandle,
   useState,
 } from 'react'
 
@@ -16,6 +14,7 @@ import Plus from './icons/Plus'
 interface Props {
   id?: string
   defaultValue?: number
+  className?: string
   onChange?: (quantity: number) => void
 }
 
@@ -68,7 +67,7 @@ export default forwardRef(function InputQuantity(
   }, [quantity, props])
 
   return (
-    <div className={styles.formControl}>
+    <div className={`${styles.formControl} ${props.className}`}>
       <button
         type="button"
         className={`${styles.stepper} ${styles.minus}`}

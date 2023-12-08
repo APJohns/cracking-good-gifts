@@ -18,9 +18,10 @@
   --red: hsl(353, 98%, 45%);
   --yellow: hsl(51, 100%, 54%);
   --cornflower: hsl(219, 41%, 42%);
+  --cornflower-50: hsl(219, 41%, 21%);
+  --cornflower-light: hsl(219, 41%, 95%);
   --blue: hsl(219, 76%, 48%);
   --purple: hsl(260, 76%, 48%);
-  --cornflower-50: hsl(219, 41%, 21%);
   --cream: hsl(47, 29%, 94%);
 
   --fs-regular: 1.25rem;
@@ -86,6 +87,7 @@ button {
   padding: 0.5rem;
   color: var(--white);
   text-align: center;
+  text-decoration: none;
   background: var(--cornflower);
 }
 
