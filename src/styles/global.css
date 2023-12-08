@@ -18,6 +18,8 @@
   --red: hsl(353, 98%, 45%);
   --yellow: hsl(51, 100%, 54%);
   --cornflower: hsl(219, 41%, 42%);
+  --blue: hsl(219, 76%, 48%);
+  --purple: hsl(260, 76%, 48%);
   --cornflower-50: hsl(219, 41%, 21%);
   --cream: hsl(47, 29%, 94%);
 
@@ -55,8 +57,12 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--blue);
   text-decoration: none;
+}
+
+a:visited {
+  color: var(--purple);
 }
 
 input,
@@ -87,6 +93,10 @@ button {
   background: var(--cornflower-50);
 }
 
+.btn:visited {
+  color: var(--white);
+}
+
 .btn:disabled {
   cursor: unset;
   color: var(--cornflower-50);
@@ -101,6 +111,7 @@ button {
 }
 
 .navPrimary .logo {
+  color: var(--black);
   font-size: 2rem;
 }
 

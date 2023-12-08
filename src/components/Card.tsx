@@ -1,16 +1,15 @@
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
-import useCart from '~/hooks/useCart'
 import { urlForImage } from '~/lib/sanity.image'
 import { type Product } from '~/lib/sanity.queries'
 import styles from '~/styles/card.module.css'
-import { addToCart, updateQuantity } from '~/utils'
 
 import InputQuantity from './InputQuantity'
+import { CartContext } from '~/pages/_app'
 
 export default function Card({ product }: { product: Product }) {
-  const cart = useCart()
+  const {cart, addToCart, updateQuantity} = useContext(CartContext)
   const [inCart, setInCart] = useState(false)
 
   const quantityRef = useRef(null)

@@ -1,18 +1,15 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useContext } from 'react'
 
 import Container from '~/components/Container'
 import Remove from '~/components/icons/Remove'
 import InputQuantity from '~/components/InputQuantity'
-import useCart from '~/hooks/useCart'
 import { urlForImage } from '~/lib/sanity.image'
 import styles from '~/styles/checkout.module.css'
-import { removeFromCart, updateQuantity } from '~/utils'
+import { CartContext } from './_app'
 
 export default function Checkout() {
-  const cart = useCart()
-
-  const [checkoutCart, setCheckoutCart] = useState(cart)
+  const {cart, removeFromCart, updateQuantity} = useContext(CartContext)
 
   const getTotal = () => {
     return Object.keys(cart).reduce(
@@ -75,9 +72,9 @@ export default function Checkout() {
         <h2>Submit Order</h2>
         <p>
           We are currently only accepting payment via donation. Your order will
-          not be fulfilled until a donation of the amount quoted here is made to{' '}
-          <a href="https://danafarber.jimmyfund.org/site/TR?fr_id=2100&pg=personal&px=2308569">
-            our Dana-Farber fundraiser page
+          not be fulfilled until a donation of the amount quoted here is made to our{' '}
+          <a href="http://danafarber.jimmyfund.org/goto/DavidJohns">
+            Dana-Farber fundraiser page
           </a>
           .
         </p>

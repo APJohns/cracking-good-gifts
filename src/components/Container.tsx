@@ -1,14 +1,13 @@
 import { Viaoda_Libre } from 'next/font/google'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import useCart from '~/hooks/useCart'
 import { urlForImage } from '~/lib/sanity.image'
-import { removeFromCart } from '~/utils'
 
 import Cart from './icons/Cart'
 import Remove from './icons/Remove'
+import { CartContext } from '~/pages/_app'
 
 const viaoda = Viaoda_Libre({ weight: '400', subsets: ['latin'] })
 
@@ -19,7 +18,7 @@ interface Props {
 }
 
 export default function Container({ heading, children }: Props) {
-  const cart = useCart()
+  const {cart, removeFromCart} = useContext(CartContext)
   const [isCartOpen, setIsCartOpen] = useState(false)
 
   return (
