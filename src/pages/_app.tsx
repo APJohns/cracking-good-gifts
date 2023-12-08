@@ -69,7 +69,6 @@ export default function App({
   const [cart, setCart] = useState<Cart>({});
 
   const addToCart = (product, quantity = 1) => {
-    console.log('adding');
     const tempCart = {...cart}
     tempCart[product._id] = {
       ...product,
@@ -80,7 +79,6 @@ export default function App({
   }
 
   const updateQuantity = (productId, quantity) => {
-    console.log('updating');
     const tempCart = {...cart}
     if (tempCart[productId] && quantity !== cart[productId].quantity) {
       tempCart[productId].quantity = quantity
@@ -90,7 +88,6 @@ export default function App({
   }
 
   const removeFromCart = (productId) => {
-    console.log('removing');
     const tempCart = {...cart}
     delete tempCart[productId]
     setCart(tempCart)
