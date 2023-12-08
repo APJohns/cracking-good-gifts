@@ -56,12 +56,12 @@ body {
   background: var(--background);
 }
 
-a {
+.link {
   color: var(--blue);
   text-decoration: none;
 }
 
-a:visited {
+.link:visited {
   color: var(--purple);
 }
 
@@ -113,6 +113,7 @@ button {
 .navPrimary .logo {
   color: var(--black);
   font-size: 2rem;
+  text-decoration: none;
 }
 
 .navList {

@@ -124,7 +124,7 @@ export default function Checkout(
           We are currently only accepting payment via donation. Your order will
           not be fulfilled until a donation of the amount quoted here is made to
           our{' '}
-          <a href="http://danafarber.jimmyfund.org/goto/DavidJohns">
+          <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
             Dana-Farber fundraiser page
           </a>
           .

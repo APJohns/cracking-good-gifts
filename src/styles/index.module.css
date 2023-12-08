@@ -40,6 +40,7 @@
   height: 100%;
   color: var(--black);
   text-align: center;
+  text-decoration: none;
 }
 
 .category:visited {
