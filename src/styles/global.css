@@ -331,4 +331,5 @@ strong {
     --app-width: 75vw;
   }
 }
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+}

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Script from 'next/script'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 import { FormEvent, useContext, useEffect, useRef, useState } from 'react'
 
@@ -12,7 +13,6 @@ import { Category, getCategories } from '~/lib/sanity.queries'
 import styles from '~/styles/checkout.module.css'
 
 import { CartContext, SharedPageProps } from './_app'
-import Script from 'next/script'
 
 export const getServerSideProps: GetServerSideProps<
   SharedPageProps & {
@@ -34,7 +34,8 @@ export const getServerSideProps: GetServerSideProps<
 export default function Checkout(
   props: InferGetServerSidePropsType<typeof getServerSideProps>,
 ) {
-  const { cart, setCart, removeFromCart, updateQuantity } = useContext(CartContext)
+  const { cart, setCart, removeFromCart, updateQuantity } =
+    useContext(CartContext)
 
   const [orderId, setOrderId] = useState<number>()
   const formRef = useRef<HTMLFormElement>(null)
@@ -68,7 +69,7 @@ export default function Checkout(
   }
 
   const submitForm = (e: FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     formRef.current.submit()
     setCart({})
   }
@@ -131,15 +132,28 @@ export default function Checkout(
         <section>
           <h2>Submit Order</h2>
           <p className="p">
-            We are currently only accepting payment via donation. Your order <strong>will not</strong> be fulfilled until a donation of the amount quoted here is made to
-            our{' '}
-            <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
+            We are currently only accepting payment via donation. Your order{' '}
+            <strong>will not</strong> be fulfilled until a donation of the
+            amount quoted here is made to our{' '}
+            <a
+              href="http://danafarber.jimmyfund.org/goto/DavidJohns"
+              className="link"
+            >
               Dana-Farber fundraiser page
             </a>
             .
           </p>
-          <p className="p"><strong>Please provide your order number</strong> in the "Personal Note" field of the donation form. Also use the same name for the donation as used here.</p>
-          <form ref={formRef} action="https://usebasin.com/f/c2d55604b0ee" method="POST" className={styles.orderForm}>
+          <p className="p">
+            <strong>Please provide your order number</strong> in the &quot;Personal
+            Note&quot; field of the donation form. Also use the same name for the
+            donation as used here.
+          </p>
+          <form
+            ref={formRef}
+            action="https://usebasin.com/f/c2d55604b0ee"
+            method="POST"
+            className={styles.orderForm}
+          >
             <input type="hidden" name="id" value={orderId} />
             <input type="hidden" name="order" value={stringifyCart()} />
             <div className={styles.orderFormGrid}>
@@ -161,12 +175,29 @@ export default function Checkout(
               </label>
               <label className={styles.acknowledge}>
                 <input type="checkbox" name="acknowledge" required />
-                <span>I acknowledge that my order will not be fulfilled until a donation equal to the total amount is made to our <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" className="link">
-                  Dana-Farber fundraiser page
-                </a>.</span>
+                <span>
+                  I acknowledge that my order will not be fulfilled until a
+                  donation equal to the total amount is made to our{' '}
+                  <a
+                    href="http://danafarber.jimmyfund.org/goto/DavidJohns"
+                    className="link"
+                  >
+                    Dana-Farber fundraiser page
+                  </a>
+                  .
+                </span>
               </label>
-              <div className="g-recaptcha" data-sitekey="6Lew3SMUAAAAAJ82QoS7gqOTkRI_dhYrFy1f7Sqy"></div>
-              <button type="submit" className={`btn ${styles.submitButton}`} onClick={submitForm}>Submit Order</button>
+              <div
+                className="g-recaptcha"
+                data-sitekey="6Lew3SMUAAAAAJ82QoS7gqOTkRI_dhYrFy1f7Sqy"
+              ></div>
+              <button
+                type="submit"
+                className={`btn ${styles.submitButton}`}
+                onClick={submitForm}
+              >
+                Submit Order
+              </button>
             </div>
           </form>
         </section>

@@ -94,7 +94,8 @@
   font-size: var(--fs-regular);
 }
 
-@media (min-width: 556px) {}
+@media (min-width: 556px) {
+}
 
 @media (min-width: 768px) {
   .checkoutLayout {
@@ -120,4 +121,5 @@
   }
 }
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+}
