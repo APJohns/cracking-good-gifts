@@ -272,6 +272,7 @@ strong {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.5rem;
+  font-size: var(--fs-subtle);
 }
 
 .filter input[type='checkbox'] {
