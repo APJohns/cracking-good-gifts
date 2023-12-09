@@ -21,7 +21,7 @@ export default function Card({ product, getCategoryOfProduct }: Props) {
 
   const getMaxQuantity = (): number | undefined => {
     const max = getCategoryOfProduct(product).maxQuantity
-    return max ? max : undefined;
+    return max ? max : undefined
   }
 
   useEffect(() => {

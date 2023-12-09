@@ -139,8 +139,6 @@ export interface Homepage {
 
 export const homepageQuery = groq`*[_type == "homepage"][0]`
 
-export async function getHomepage(
-  client: SanityClient
-): Promise<Homepage> {
+export async function getHomepage(client: SanityClient): Promise<Homepage> {
   return await client.fetch(homepageQuery)
 }

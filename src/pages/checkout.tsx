@@ -60,9 +60,9 @@ export default function Checkout(
   const stringifyCart = (): string => {
     const products = Object.keys(cart).map(
       (product) =>
-        `${cart[product].quantity}x ${cart[product].title} (${findCategoryById(
-          cart[product].category._ref,
-        ).title}) $${cart[product].price}ea`,
+        `${cart[product].quantity}x ${cart[product].title} (${
+          findCategoryById(cart[product].category._ref).title
+        }) $${cart[product].price}ea`,
     )
     products.push(`Total: $${getTotal()}`)
     return products.join('\n')
@@ -110,7 +110,9 @@ export default function Checkout(
                   <InputQuantity
                     className={styles.productQuantity}
                     defaultValue={Number(cart[product].quantity)}
-                    max={findCategoryById(cart[product].category._ref).maxQuantity}
+                    max={
+                      findCategoryById(cart[product].category._ref).maxQuantity
+                    }
                     onChange={(quantity) => handleChange(product, quantity)}
                   />
                 </div>
@@ -145,9 +147,9 @@ export default function Checkout(
             .
           </p>
           <p className="p">
-            <strong>Please provide your order number</strong> in the &quot;Personal
-            Note&quot; field of the donation form. Also use the same name for the
-            donation as used here.
+            <strong>Please provide your order number</strong> in the
+            &quot;Personal Note&quot; field of the donation form. Also use the
+            same name for the donation as used here.
           </p>
           <form
             ref={formRef}
