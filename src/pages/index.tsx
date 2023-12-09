@@ -67,20 +67,20 @@ export default function IndexPage(
           One gift at a time
         </p>
       </header>
-      {props.homepage.title &&
+      {homepage.title &&
         <section className={`${styles.aboutUs} standard-padding-x`}>
-          <h2>{props.homepage.title}</h2>
+          <h2>{homepage.title}</h2>
           <div className={styles.aboutUsBlurb}>
             <Image
-              src={urlForImage(props.homepage.image)
+              src={urlForImage(homepage.image)
                 .width(300)
                 .height(300)
                 .url()}
               height={300}
               width={300}
-              alt={props.homepage.alt}
+              alt={homepage.alt}
             />
-            <p>{props.homepage.blurb}</p>
+            <p>{homepage.blurb}</p>
           </div>
         </section>
       }
