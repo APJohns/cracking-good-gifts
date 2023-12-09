@@ -29,7 +29,7 @@
 .productDetails {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   margin-right: 1rem;
   font-size: var(--fs-subtle);
 }
