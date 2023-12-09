@@ -1,6 +1,7 @@
 import '~/styles/global.css'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { AppProps } from 'next/app'
 import {
   IBM_Plex_Mono,
@@ -135,6 +136,7 @@ export default function App({
         <>
           <Component {...pageProps} />
           <Analytics />
+          <SpeedInsights />
         </>
       )}
     </CartContext.Provider>
