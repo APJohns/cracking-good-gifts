@@ -79,7 +79,7 @@ export default function Checkout(
   }, [])
 
   return (
-    <Container>
+    <Container showCart={false}>
       <Script src="https://www.google.com/recaptcha/api.js" async defer />
       <h1 className="page-heading standard-padding-x">Checkout</h1>
       <div className={`${styles.checkoutLayout} standard-padding-x`}>
