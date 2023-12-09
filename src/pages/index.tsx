@@ -67,7 +67,7 @@ export default function IndexPage(
           One gift at a time
         </p>
       </header>
-      {homepage.title &&
+      {homepage &&
         <section className={`${styles.aboutUs} standard-padding-x`}>
           <h2>{homepage.title}</h2>
           <div className={styles.aboutUsBlurb}>
