@@ -1,5 +1,6 @@
 import '~/styles/global.css'
 
+import { Analytics } from '@vercel/analytics/react'
 import type { AppProps } from 'next/app'
 import {
   IBM_Plex_Mono,
@@ -15,7 +16,6 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { Analytics } from '@vercel/analytics/react';
 
 import { type Product } from '~/lib/sanity.queries'
 
@@ -131,10 +131,12 @@ export default function App({
         <PreviewProvider token={token}>
           <Component {...pageProps} />
         </PreviewProvider>
-      ) : <>
-        <Component {...pageProps} />
-        <Analytics />
-      </>}
+      ) : (
+        <>
+          <Component {...pageProps} />
+          <Analytics />
+        </>
+      )}
     </CartContext.Provider>
   )
 }

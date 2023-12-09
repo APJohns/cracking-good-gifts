@@ -109,7 +109,10 @@ export default function CategoryPage(
             </label>
           ))}
         </fieldset>
-        <ProductList products={filteredProducts} getCategoryOfProduct={() => category} />
+        <ProductList
+          products={filteredProducts}
+          getCategoryOfProduct={() => category}
+        />
       </section>
     </Container>
   )

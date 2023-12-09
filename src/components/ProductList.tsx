@@ -14,7 +14,10 @@ export default function ProductList({ products, getCategoryOfProduct }: Props) {
       <ul className={styles.gallery}>
         {products.map((product) => (
           <li key={product._id}>
-            <Card product={product} getCategoryOfProduct={getCategoryOfProduct} />
+            <Card
+              product={product}
+              getCategoryOfProduct={getCategoryOfProduct}
+            />
           </li>
         ))}
       </ul>

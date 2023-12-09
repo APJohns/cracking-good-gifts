@@ -1,26 +1,26 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import Image from 'next/image'
 import { Viaoda_Libre } from 'next/font/google'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Container from '~/components/Container'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
+import { urlForImage } from '~/lib/sanity.image'
 import {
   categoriesQuery,
   type Category,
   getCategories,
-  getOccasions,
-  type Occasion,
-  occasionsQuery,
   getHomepage,
+  getOccasions,
   type Homepage,
   homepageQuery,
+  type Occasion,
+  occasionsQuery,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import styles from '~/styles/index.module.css'
-import { urlForImage } from '~/lib/sanity.image'
 
 const viaoda = Viaoda_Libre({ weight: '400', subsets: ['latin'] })
 
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps<
       token: draftMode ? readToken : '',
       categories,
       occasions,
-      homepage
+      homepage,
     },
   }
 }
@@ -67,15 +67,12 @@ export default function IndexPage(
           One gift at a time
         </p>
       </header>
-      {homepage &&
+      {homepage && (
         <section className={`${styles.aboutUs} standard-padding-x`}>
           <h2>{homepage.title}</h2>
           <div className={styles.aboutUsBlurb}>
             <Image
-              src={urlForImage(homepage.image)
-                .width(300)
-                .height(300)
-                .url()}
+              src={urlForImage(homepage.image).width(300).height(300).url()}
               height={300}
               width={300}
               alt={homepage.alt}
@@ -83,7 +80,7 @@ export default function IndexPage(
             <p>{homepage.blurb}</p>
           </div>
         </section>
-      }
+      )}
       <section className={`${styles.categories} standard-padding-x`}>
         <h2>Shop by Category</h2>
         <nav>

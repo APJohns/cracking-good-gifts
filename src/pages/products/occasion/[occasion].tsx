@@ -78,7 +78,7 @@ export default function OccasionPage(
   }
 
   const getCategoryOfProduct = (product: Product): Category => {
-    return categories.find(category => category._id === product.category._ref)
+    return categories.find((category) => category._id === product.category._ref)
   }
 
   useEffect(() => {
@@ -117,7 +117,10 @@ export default function OccasionPage(
             </label>
           ))}
         </fieldset>
-        <ProductList products={filteredProducts} getCategoryOfProduct={getCategoryOfProduct} />
+        <ProductList
+          products={filteredProducts}
+          getCategoryOfProduct={getCategoryOfProduct}
+        />
       </section>
     </Container>
   )
