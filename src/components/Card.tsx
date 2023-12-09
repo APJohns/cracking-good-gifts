@@ -2,17 +2,27 @@ import Image from 'next/image'
 import { useContext, useEffect, useRef, useState } from 'react'
 
 import { urlForImage } from '~/lib/sanity.image'
-import { type Product } from '~/lib/sanity.queries'
+import { Category, type Product } from '~/lib/sanity.queries'
 import { CartContext } from '~/pages/_app'
 import styles from '~/styles/card.module.css'
 
 import InputQuantity from './InputQuantity'
 
-export default function Card({ product }: { product: Product }) {
+interface Props {
+  product: Product
+  getCategoryOfProduct: (product: Product) => Category
+}
+
+export default function Card({ product, getCategoryOfProduct }: Props) {
   const { cart, addToCart, updateQuantity } = useContext(CartContext)
   const [inCart, setInCart] = useState(false)
 
   const quantityRef = useRef(null)
+
+  const getMaxQuantity = (): number | undefined => {
+    const max = getCategoryOfProduct(product).maxQuantity
+    return max ? max : undefined;
+  }
 
   useEffect(() => {
     setInCart(!!cart[product._id])
@@ -41,8 +51,9 @@ export default function Card({ product }: { product: Product }) {
         <div className={styles.addToCart}>
           <InputQuantity
             ref={quantityRef}
+            max={getMaxQuantity()}
             onChange={() =>
-              updateQuantity(product._id, quantityRef.current.value)
+              updateQuantity(product._id, Number(quantityRef.current.value))
             }
           />
           <button

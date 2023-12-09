@@ -21,6 +21,11 @@ export default defineType({
         maxLength: 96,
       },
     }),
+    defineField({
+      name: 'maxQuantity',
+      title: 'Max Quantity',
+      type: 'number',
+    }),
   ],
   preview: {
     select: {

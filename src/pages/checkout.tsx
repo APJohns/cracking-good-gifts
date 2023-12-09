@@ -53,16 +53,16 @@ export default function Checkout(
     }
   }
 
+  const findCategoryById = (categoryId: string): Category => {
+    return props.categories.find((category) => category._id === categoryId)
+  }
+
   const stringifyCart = (): string => {
-    const findCategoryById = (categoryId: string): string => {
-      return props.categories.find((category) => category._id === categoryId)
-        .title
-    }
     const products = Object.keys(cart).map(
       (product) =>
         `${cart[product].quantity}x ${cart[product].title} (${findCategoryById(
           cart[product].category._ref,
-        )}) $${cart[product].price}ea`,
+        ).title}) $${cart[product].price}ea`,
     )
     products.push(`Total: $${getTotal()}`)
     return products.join('\n')
@@ -110,6 +110,7 @@ export default function Checkout(
                   <InputQuantity
                     className={styles.productQuantity}
                     defaultValue={Number(cart[product].quantity)}
+                    max={findCategoryById(cart[product].category._ref).maxQuantity}
                     onChange={(quantity) => handleChange(product, quantity)}
                   />
                 </div>

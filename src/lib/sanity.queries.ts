@@ -82,6 +82,7 @@ export interface Category {
   _id: string
   title: string
   slug: Slug
+  maxQuantity: number
 }
 
 export const categoriesQuery = groq`*[_type == "category" && defined(slug.current)]`

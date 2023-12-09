@@ -20,6 +20,12 @@
   background: transparent;
 }
 
+.stepper:disabled {
+  cursor: not-allowed;
+  color: #aaa;
+  background: #f5f5f5;
+}
+
 .stepper.minus {
   border-right: 1px solid #ccc;
 }

@@ -1,15 +1,20 @@
-import { Product } from '~/lib/sanity.queries'
+import { Category, Product } from '~/lib/sanity.queries'
 import styles from '~/styles/productList.module.css'
 
 import Card from './Card'
 
-export default function ProductList({ products }: { products: Product[] }) {
+interface Props {
+  products: Product[]
+  getCategoryOfProduct: (product: Product) => Category
+}
+
+export default function ProductList({ products, getCategoryOfProduct }: Props) {
   if (products.length) {
     return (
       <ul className={styles.gallery}>
         {products.map((product) => (
           <li key={product._id}>
-            <Card product={product} />
+            <Card product={product} getCategoryOfProduct={getCategoryOfProduct} />
           </li>
         ))}
       </ul>

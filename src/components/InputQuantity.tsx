@@ -13,8 +13,9 @@ import Plus from './icons/Plus'
 
 interface Props {
   id?: string
-  defaultValue?: number
   className?: string
+  defaultValue?: number
+  max?: number
   onChange?: (quantity: number) => void
 }
 
@@ -25,31 +26,40 @@ export default forwardRef(function InputQuantity(
   const [quantity, setQuantity] = useState(1)
   const [isDirty, setIsDirty] = useState(false)
 
+  const valueValidation = (value): number => {
+    if (props.max && value > props.max) {
+      return props.max
+    } else if (value > 100) {
+      return 100
+    } else if (value < 0) {
+      return 0
+    } else {
+      return value
+    }
+  }
+
   const updateQuantity = (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value)
 
-    // Constrol type validation
+    // Control type validation
     if (e.target.value === '' || value < 0) {
       setQuantity(0)
     } else if (typeof value === 'number' && !Number.isNaN(value)) {
       setQuantity(value)
     }
 
-    // Control value validation
-    if (value > 100) {
-      setQuantity(100)
-    }
+    setQuantity(valueValidation(value))
 
     setIsDirty(true)
   }
 
   const minusQuantity = () => {
-    setQuantity(quantity - 1 >= 0 ? quantity - 1 : 0)
+    setQuantity(valueValidation(quantity - 1))
     setIsDirty(true)
   }
 
   const plusQuantity = () => {
-    setQuantity(quantity + 1)
+    setQuantity(valueValidation(quantity + 1))
     setIsDirty(true)
   }
 
@@ -72,6 +82,7 @@ export default forwardRef(function InputQuantity(
         type="button"
         className={`${styles.stepper} ${styles.minus}`}
         aria-label="reduce quantity"
+        disabled={quantity === 0}
         onClick={minusQuantity}
       >
         <Minus />
@@ -87,6 +98,7 @@ export default forwardRef(function InputQuantity(
         type="button"
         className={`${styles.stepper} ${styles.plus}`}
         aria-label="increase quantity"
+        disabled={quantity === props.max}
         onClick={plusQuantity}
       >
         <Plus />
