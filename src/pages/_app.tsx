@@ -15,6 +15,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { Analytics } from '@vercel/analytics/react';
 
 import { type Product } from '~/lib/sanity.queries'
 
@@ -130,9 +131,10 @@ export default function App({
         <PreviewProvider token={token}>
           <Component {...pageProps} />
         </PreviewProvider>
-      ) : (
+      ) : <>
         <Component {...pageProps} />
-      )}
+        <Analytics />
+      </>}
     </CartContext.Provider>
   )
 }
