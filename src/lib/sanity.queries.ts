@@ -96,7 +96,7 @@ export async function getCategoryById(
   client: SanityClient,
   categoryId: string,
 ): Promise<Category> {
-  return await client.fetch(categoryByIdQuery)
+  return await client.fetch(categoryByIdQuery, { categoryId })
 }
 
 // Occasion
@@ -125,4 +125,21 @@ export async function getByTypeAndSlug(
     type,
     slug,
   })
+}
+
+// Homepage
+
+export interface Homepage {
+  title: string
+  blurb: string
+  image: ImageAsset
+  alt: string
+}
+
+export const homepageQuery = groq`*[_type == "homepage"][0]`
+
+export async function getHomepage(
+  client: SanityClient
+): Promise<Homepage> {
+  return await client.fetch(homepageQuery)
 }
