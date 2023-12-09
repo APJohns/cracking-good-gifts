@@ -55,12 +55,12 @@ export default function OccasionPage(
     productsByOccasionQuery,
   )
 
-  const [categories] = useLiveQuery<Occasion[]>(
+  const [categories] = useLiveQuery<Category[]>(
     props.categories,
     categoriesQuery,
   )
 
-  const [occasion] = useLiveQuery<Category>(props.occasion, byTypeAndSlugQuery)
+  const [occasion] = useLiveQuery<Occasion>(props.occasion, byTypeAndSlugQuery)
 
   const router = useRouter()
 
@@ -75,6 +75,10 @@ export default function OccasionPage(
       appliedFilters.delete(e.target.value)
     }
     setFilters(appliedFilters)
+  }
+
+  const getCategoryOfProduct = (product: Product): Category => {
+    return categories.find(category => category._id === product.category._ref)
   }
 
   useEffect(() => {
@@ -113,7 +117,7 @@ export default function OccasionPage(
             </label>
           ))}
         </fieldset>
-        <ProductList products={filteredProducts} />
+        <ProductList products={filteredProducts} getCategoryOfProduct={getCategoryOfProduct} />
       </section>
     </Container>
   )

@@ -18,6 +18,22 @@
   transform: translateY(50%);
 }
 
+.aboutUs {
+  margin-top: 4rem;
+}
+
+.aboutUsBlurb {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.aboutUsBlurb img {
+  width: 100%;
+  height: auto;
+}
+
 .categories {
   margin: 4rem auto;
 }
@@ -55,6 +71,15 @@
 @media (min-width: 556px) {
   .categoryList {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .aboutUsBlurb {
+    flex-direction: row;
+  }
+
+  .aboutUsBlurb img {
+    width: 300px;
+    height: 300px;
   }
 }
 
