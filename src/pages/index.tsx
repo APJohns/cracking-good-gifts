@@ -66,6 +66,7 @@ export default function IndexPage(
           <br />
           One gift at a time
         </p>
+        <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" target="_blank" className={styles.cta}>Make a Donation</a>
       </header>
       {homepage && (
         <section className={`${styles.aboutUs} standard-padding-x`}>

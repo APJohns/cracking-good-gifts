@@ -20,6 +20,8 @@
   --cornflower: hsl(219, 41%, 42%);
   --cornflower-50: hsl(219, 41%, 21%);
   --cornflower-light: hsl(219, 41%, 95%);
+  --accent: hsl(13, 75%, 54%);
+  --accent-light: hsl(13, 75%, 65%);
   --blue: hsl(219, 76%, 48%);
   --purple: hsl(260, 76%, 48%);
   --cream: hsl(47, 29%, 94%);
