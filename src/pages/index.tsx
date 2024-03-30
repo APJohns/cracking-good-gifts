@@ -60,14 +60,24 @@ export default function IndexPage(
   return (
     <Container>
       <header className="hero">
-        <h1 className={viaoda.className}>Cracking Good Gifts</h1>
-        <p className="tagline">
-          Crafting a better world
-          <br />
-          One gift at a time
-        </p>
-        <a href="http://danafarber.jimmyfund.org/goto/DavidJohns" target="_blank" className={styles.cta}>Make a Donation</a>
+        <div className="hero-content">
+          <h1 className={viaoda.className}>Cracking Good Gifts</h1>
+          <p className="tagline">
+            Crafting a better world
+            <br />
+            One gift at a time
+          </p>
+        </div>
       </header>
+      <section className={styles.donate}>
+        <div className={styles.donateBlurb}>
+          <h2>Help Us Reach Our Goal</h2>
+          <p>All proceeds go to Dana-Farber Cancer Institute. Help us reach our goal of $10,000 before April 15th!</p>
+        </div>
+        <div className={styles.donateBtn}>
+          <Link href="http://danafarber.jimmyfund.org/goto/DavidJohns" target="_blank" className={styles.cta}>Make a Donation</Link>
+        </div>
+      </section>
       {homepage && (
         <section className={`${styles.aboutUs} standard-padding-x`}>
           <h2>{homepage.title}</h2>
