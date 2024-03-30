@@ -133,10 +133,6 @@ export default function Checkout(
           </dl>
         </section>
         <section>
-          <h2>Shipping</h2>
-          <p>{}</p>
-        </section>
-        <section>
           <h2>Submit Order</h2>
           <p className="p">
             We are currently only accepting payment via donation. Your order{' '}
