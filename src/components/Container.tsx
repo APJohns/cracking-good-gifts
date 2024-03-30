@@ -26,11 +26,14 @@ export default function Container({ heading, showCart = true, children }: Props)
       <header className="header">
         <nav className="navPrimary">
           <Link href="/" className={`logo ${viaoda.className}`}>
-            Cracking Good Gifts
+            CGG
           </Link>
           <ul className="navList">
             {/* TODO: Uncomment link when all rpoducts page is setup */}
             {/* <li><Link href="/products">Shop</Link></li> */}
+            <li>
+              <Link href="http://danafarber.jimmyfund.org/goto/DavidJohns" target='_blank' className="navDonate">Donate</Link>
+            </li>
             {showCart && (
               <li className="cartContainer">
                 <button
