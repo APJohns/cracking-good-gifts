@@ -72,10 +72,10 @@ export default function IndexPage(
       <section className={styles.donate}>
         <div className={styles.donateBlurb}>
           <h2>Help Us Reach Our Goal</h2>
-          <p>All proceeds go to Dana-Farber Cancer Institute. Help us reach our goal of $10,000 before April 15th!</p>
+          <p>All proceeds go to Dana-Farber Cancer Institute. Help us reach our goal!</p>
         </div>
         <div className={styles.donateBtn}>
-          <Link href="http://danafarber.jimmyfund.org/goto/DavidJohns" target="_blank" className={styles.cta}>Make a Donation</Link>
+          <Link href="https://jimmyfund.app.link/e/I0ZeMV3LZJb" target="_blank" className={styles.cta}>Make a Donation</Link>
         </div>
       </section>
       {homepage && (
